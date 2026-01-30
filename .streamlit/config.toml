@@ -1,0 +1,13 @@
+[theme]
+base = "dark"
+# Troque para "light" para tema claro
+# primaryColor = "#FF4B4B"
+# backgroundColor = "#0E1117"
+# secondaryBackgroundColor = "#262730"
+# textColor = "#FAFAFA"
+
+[server]
+port = 8501
+
+[browser]
+gatherUsageStats = false
