@@ -4,7 +4,7 @@ import warnings
 import billboard
 
 # Anos suportados pelo year-end hot-100-songs (2006–2025)
-ANO_INICIAL = 1958
+ANO_INICIAL = 2006
 ANO_FINAL = 2025
 MUSICAS_POR_ANO = 10
 ARQUIVO_DB = "top_musicas.db"
