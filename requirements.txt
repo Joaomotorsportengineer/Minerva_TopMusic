@@ -1,2 +1,4 @@
 streamlit
 billboard.py
+python-dotenv
+requests
