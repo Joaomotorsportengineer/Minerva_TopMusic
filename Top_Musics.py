@@ -10,7 +10,6 @@ YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 
 def get_youtube_track(title: str, artist: str):
-    """Busca no YouTube e retorna (url_vídeo, url_thumbnail) ou (None, None)."""
     if not YOUTUBE_API_KEY:
         return None, None
     url = "https://www.googleapis.com/youtube/v3/search"
@@ -44,24 +43,32 @@ def get_youtube_track(title: str, artist: str):
         return None, None
 
 
-st.title("Billboard Hot 100 - Top 30 por ano")
+st.title("Billboard Hot 100 - Top músicas por ano")
 
 year = st.selectbox(
     "Ano",
     options=list(range(2025, 1957, -1)),
     index=0,
 )
+quantidade = st.slider(
+    "Quantidade de músicas",
+    min_value=10,
+    max_value=100,
+    value=30,
+    step=5,
+    help="O year-end Hot 100 tem até 100 músicas.",
+)
 
-if st.button("Buscar top 30"):
+if st.button("Buscar"):
     with st.spinner("Carregando..."):
         try:
             chart = billboard.ChartData("hot-100-songs", year=year)
-            top_30 = list(chart)[:30]
+            top_musicas = list(chart)[:quantidade]
         except Exception:
             st.error("Não foi possível carregar o ranking. Tente outro ano.")
             st.stop()
 
-    for s in top_30:
+    for s in top_musicas:
         url_youtube, img_youtube = get_youtube_track(s.title, s.artist)
         img = getattr(s, "image", None) or img_youtube
 
