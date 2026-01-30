@@ -3,12 +3,9 @@ import os
 from langchain_openai import ChatOpenAI
 from langchain_community.utilities import SQLDatabase
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
-from dotenv import load_dotenv
 from langchain.agents import create_agent
 
-load_dotenv() 
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") 
+OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY") 
 
 
 model = ChatOpenAI(

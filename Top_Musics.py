@@ -2,11 +2,8 @@ import os
 import streamlit as st
 import billboard
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+YOUTUBE_API_KEY = st.secrets.get("YOUTUBE_API_KEY") or os.getenv("YOUTUBE_API_KEY")
 
 
 def get_youtube_track(title: str, artist: str):
