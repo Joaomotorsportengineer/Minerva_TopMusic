@@ -47,14 +47,14 @@ st.title("Billboard Hot 100 - Top músicas por ano")
 
 year = st.selectbox(
     "Ano",
-    options=list(range(2025, 1957, -1)),
+    options=list(range(2025, 2006, -1)),
     index=0,
 )
 quantidade = st.slider(
     "Quantidade de músicas",
-    min_value=10,
+    min_value=5,
     max_value=100,
-    value=30,
+    value=10,
     step=5,
     help="O year-end Hot 100 tem até 100 músicas.",
 )
@@ -82,7 +82,7 @@ if st.button("Buscar"):
             else:
                 st.caption("—")
         with col2:
-            st.write(f"**{s.rank}.** {s.title} — *{s.artist}*")
+            st.write(f"**{s.rank}.** {s.title} — *{s.artist}* ({year})")
             if url_youtube:
                 st.markdown(f"[Ouvir no YouTube]({url_youtube})")
             else:

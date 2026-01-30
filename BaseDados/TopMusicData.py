@@ -15,17 +15,18 @@ def main():
     warnings.filterwarnings("ignore", category=UserWarning, module="billboard")
 
     conn = sqlite3.connect(ARQUIVO_DB)
+    conn.execute(f"DROP TABLE IF EXISTS {TABELA}")
     conn.execute(
         f"""
-        CREATE TABLE IF NOT EXISTS {TABELA} (
+        CREATE TABLE {TABELA} (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome_musica TEXT NOT NULL,
             ano INTEGER NOT NULL,
-            autor TEXT NOT NULL
+            autor TEXT NOT NULL,
+            colocacao INTEGER NOT NULL
         )
         """
     )
-    conn.execute(f"DELETE FROM {TABELA}")
 
     for year in range(ANO_INICIAL, ANO_FINAL + 1):
         try:
@@ -34,8 +35,8 @@ def main():
                 if i >= MUSICAS_POR_ANO:
                     break
                 conn.execute(
-                    f"INSERT INTO {TABELA} (nome_musica, ano, autor) VALUES (?, ?, ?)",
-                    (entry.title, year, entry.artist),
+                    f"INSERT INTO {TABELA} (nome_musica, ano, autor, colocacao) VALUES (?, ?, ?, ?)",
+                    (entry.title, year, entry.artist, entry.rank),
                 )
             print(f"Ano {year}: ok")
         except Exception as e:

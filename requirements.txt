@@ -2,3 +2,7 @@ streamlit
 billboard.py
 python-dotenv
 requests
+langchain  
+langgraph  
+langchain-community
+langchain_openai 
